@@ -20,6 +20,9 @@ const getReview = function(req,res){
 }
 function _addReview(req,res,game){
     const review = {name:req.body.name, review: req.body.review, rating: req.body.rating}
+    if(!game.reviews){
+        game.reviews = [];
+    }
     game.reviews.push(review);
     game.save(function(err,game){
        const response = {

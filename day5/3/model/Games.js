@@ -41,7 +41,7 @@ const gameSchema=new mongoose.Schema({
     },
     price:Number,
     year:Number,
-    reviews:[],
+    reviews:[reviewSchema],
     minPlayers:{
         type:Number,
         min:1,
