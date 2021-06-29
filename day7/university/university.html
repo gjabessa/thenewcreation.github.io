@@ -1,10 +1,10 @@
-<input type="text" ng-model="universityId">
-<p ng-hide= "universityId != number">Correct</p>
-<p ng-show= "universityId != number">Incorrect</p>
 
 <div>
+    Search: <input type="text" ng-model="university">
+
     <ul>
-        <li ng-repeat="university in UniversityCtrl.university | limitTo: 5"> {{university.name}}
+        <li ng-repeat="university in UniversityCtrl.university |  filter: university | limitTo: 10"> 
+            {{university.name}}
             <ul>
                 <li>domain: {{ university.domains[0] }}</li>
                 <li>name: {{ university.name }}</li>
