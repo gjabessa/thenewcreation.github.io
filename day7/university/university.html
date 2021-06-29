@@ -1,0 +1,17 @@
+<input type="text" ng-model="universityId">
+<p ng-hide= "universityId != number">Correct</p>
+<p ng-show= "universityId != number">Incorrect</p>
+
+<div>
+    <ul>
+        <li ng-repeat="university in UniversityCtrl.university | limitTo: 5"> {{university.name}}
+            <ul>
+                <li>domain: {{ university.domains[0] }}</li>
+                <li>name: {{ university.name }}</li>
+                <li>Code: {{ university.alpha_two_code }}</li>
+                <li>country: {{ university.country }}</li>
+
+            </ul>
+        </li>
+    </ul>
+</div>
