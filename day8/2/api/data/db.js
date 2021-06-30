@@ -1,8 +1,10 @@
 const mongoose=require("mongoose");
-require("../model/Games");
- const dbName="meanGames";
+
+ const dbName="TransportDB";
  const url="mongodb://localhost:27017/"+dbName;
+ 
  mongoose.connect(url,{useNewUrlParser:true,useUnifiedTopology:true});
+
  mongoose.connection.on("connected",function(){
      console.log("Mongoose Connected",url);
  });

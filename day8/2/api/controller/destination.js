@@ -1,32 +1,36 @@
 const mongoose = require("mongoose")
-const Game = mongoose.model("Game");
+const User = mongoose.model("User");
 
-const getPublisher = function(req,res){
+const getDestination = function(req,res){
     const id = req.params.id;
-    Game.findById(id).exec(function(err,game){
+    User.findById(id).exec(function(err,user){
         const response = {
             status:200,
-            data: game
+            data: user
         }
         if(err){
             response.status = 500;
             response.data = err;
-        } else if (!game){
+        } else if (!user){
             response.status = 400;
-            response.data = "Game not found";
-        } else if (game){
+            response.data = "User not found";
+        } else if (user){
             response.status = 200;
-            response.data = game.publisher;
+            response.data = user.destinations;
         }
         res.status(response.status).json(response)
     })
 }
-function _addPublisher(req,res,game){
-    game.publisher= {name: req.body.name, address: req.body.address};
-    game.save(function(err,game){
+function _addDestination(req,res,user){
+    const destination = {name: req.body.name, visitScheduleDate: Date.now()}
+    if(!user.destinations){
+        user.destinations = [];
+    } 
+    user.destinations.push(destination)
+    user.save(function(err,user){
        const response = {
             status:200,
-            data: game
+            data: user
         }
         if(err){
             response.status = 500;
@@ -35,43 +39,43 @@ function _addPublisher(req,res,game){
         res.status(response.status).json(response.data)
     })
 }
-const addPublisher = function(req,res){
+const addDestination = function(req,res){
     const id = req.params.id;
-    Game.findById(id).exec(function(err,game){
+    User.findById(id).exec(function(err,user){
         const response = {
             status:200,
-            data: game
+            data: user
         }
         if(err){
             response.status = 500;
             response.data = err;
-        } else if(!game) {
+        } else if(!user) {
             response.status = 404;
-            response.data = "Game not found";
+            response.data = "User not found";
         } 
-        if (game){
-            _addPublisher(req,res,game)
+        if (user){
+            _addDestination(req,res,user)
         }  else {
             res.status(response.status).json(response.data)
         }
     })
 }
-const fullUpdatePublisher = function(req,res){
+const fullUpdateDestination = function(req,res){
     const id = req.params.id;
-    Game.findById(id).exec(function(err,game){
+    User.findById(id).exec(function(err,user){
         const response = {
             status:200,
-            data: game
+            data: user
         }
         if(err){
             response.status = 500;
             response.data = err;
-        } else if(!game){
+        } else if(!user){
             response.status = 404;
-            response.data = "Game not found"
+            response.data = "User not found"
         } 
-        if (game){
-            _addPublisher(req,res,game)
+        if (user){
+            _addDestination(req,res,user)
         }  else {
             res.status(response.status).json(response.data)
         }
@@ -79,12 +83,14 @@ const fullUpdatePublisher = function(req,res){
     })
 
 }
-function _deletePublisher(req,res,game){
-    game.publisher.remove();
-            game.save(function(err,newGame){
+function _deleteDestination(req,res,user){
+    console.log(user)
+    user.destinations = []
+    console.log(user)
+            user.save(function(err,newUser){
                 const response = {
                     status:200,
-                    data: newGame
+                    data: newUser
                 }
                 if(err){
                     response.status = 500;
@@ -93,25 +99,25 @@ function _deletePublisher(req,res,game){
                 res.status(response.status).json(response.data)
             })
 }
-const deletePublisher = function(req,res){
+const deleteDestination = function(req,res){
     const id = req.params.id;
-    Game.findById(id).exec(function(err,game){
+    User.findById(id).exec(function(err,user){
         const response = {
             status:200,
-            data: game
+            data: user
         }
         if(err){
             response.status = 500;
             response.data = err;
-        } else if (!game){
+        } else if (!user){
             response.status = 404;
-            response.data = "Game not found";
-        } else if (!game.publisher){
+            response.data = "User not found";
+        } else if (!user.destination){
             response.status = 404;
-            response.data = "Publisher not found";
+            response.data = "Destination not found";
         }
-        if(game.publisher){
-            _deletePublisher(req,res,game)
+        if(user.destinations){
+            _deleteDestination(req,res,user)
         } else {
             res.status(response.status).json(response.data)
         }
@@ -119,4 +125,4 @@ const deletePublisher = function(req,res){
     })
 }
 
-module.exports = {getPublisher, addPublisher, fullUpdatePublisher, deletePublisher}
+module.exports = {getDestination, addDestination, fullUpdateDestination, deleteDestination}

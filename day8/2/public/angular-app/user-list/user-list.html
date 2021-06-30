@@ -1,0 +1,17 @@
+<h1>
+    {{vm.title}}
+</h1>
+
+<ul>
+    <li ng-repeat="user in vm.users">
+        <a ng-href="#!/users/{{user._id}}">{{user.name}}</a>
+    </li>
+</ul>
+
+<form name="vm.userForm" ng-submit="vm.addUser()">
+    to add a new user please fill in the fields:<br>
+    Name: <input type="text" name="name" required ng-model="vm.newUserName" style="color: black;"></br>
+    Budget: <input type="number" name="price" required ng-model="vm.newUserBudget" style="color: black;"></br>
+    
+    <button type="submit" class="btn-success">Add User</button></br>
+</form>
