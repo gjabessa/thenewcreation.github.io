@@ -4,11 +4,19 @@ function UsersDataFactory($http) {
         getAll: getAllUsers,
         getOne: getOneUser,
         addOne: addOneUser,
-        delete: deleteUser
+        delete: deleteUser,
+        addDestination: addDestination,
+        deleteDestination: deleteDestination
     };
     function addOneUser(user) {
         return $http.post("/api/users", user).then(complete).catch(failed);
 
+    }
+    function addDestination(id,destination){
+        return $http.post("/api/users/"+id+"/destination", destination).then(complete).catch(failed);
+    }
+    function deleteDestination(id,destinationId){
+        return $http.delete("/api/users/"+id+"/destination/"+destinationId).then(complete).catch(failed);
     }
     function getAllUsers() {
         return $http.get("/api/users").then(complete).catch(failed);

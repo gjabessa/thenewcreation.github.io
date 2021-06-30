@@ -125,4 +125,43 @@ const deleteDestination = function(req,res){
     })
 }
 
-module.exports = {getDestination, addDestination, fullUpdateDestination, deleteDestination}
+const deleteOneDestination = function(req,res){
+    const id = req.params.id;
+    const destinationId = req.params.destinationId;
+    User.findById(id).exec(function(err,user){
+        const response = {
+            status:200,
+            data: user
+        }
+        if(err){
+            response.status = 500;
+            response.data = err;
+        } else if (!user){
+            response.status = 404;
+            response.data = "User not found";
+        } else if (!user.destination){
+            response.status = 404;
+            response.data = "Destination not found";
+        }
+        if(user.destinations){
+            user.destinations.id(destinationId).remove();
+            console.log(user.destinations);
+            user.save(function(err,newUser){
+                const response = {
+                    status:200,
+                    data: newUser
+                }
+                if(err){
+                    response.status = 500;
+                    response.data = err;
+                }
+                res.status(response.status).json(response.data)
+            })
+        } else {
+            res.status(response.status).json(response.data)
+        }
+
+    })
+}
+
+module.exports = {getDestination, addDestination, fullUpdateDestination, deleteDestination, deleteOneDestination}

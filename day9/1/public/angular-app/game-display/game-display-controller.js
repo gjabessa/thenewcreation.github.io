@@ -12,6 +12,15 @@ function GameController(GamesDataFactory, $routeParams) {
         vm.game = response;
         vm.stars = _getStarsArray(vm.game.rate)
     });
+    vm.deleteGame = function () {
+        const gameId = $routeParams.id;
+        
+        GamesDataFactory.delete(gameId).then(function (response) {
+            console.log("Game removed");
+        }).catch(function (error) {
+            console.log("Error while deleting ", error)
+        })
 
+    };
 
 }

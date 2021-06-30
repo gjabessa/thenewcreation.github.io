@@ -23,5 +23,30 @@ function UserController(UsersDataFactory, $routeParams, $location) {
 
     };
 
+    vm.addDestination = function () {
+        const userId = $routeParams.id;
+        const postData = {
+            name: vm.newDestinationName
+        }
+       
+        UsersDataFactory.addDestination(userId,postData).then(function (response) {
+            console.log("Destination added");
+        }).catch(function (error) {
+            console.log("Error while adding ", error)
+        })
+
+    };
+
+    vm.deleteDestination = function (destinationId) {
+        const userId = $routeParams.id;
+        console.log(destinationId)
+        UsersDataFactory.deleteDestination(userId,destinationId).then(function (response) {
+            console.log("Destination removed");
+        }).catch(function (error) {
+            console.log("Error while deleting ", error)
+        })
+
+    };
+
 
 }

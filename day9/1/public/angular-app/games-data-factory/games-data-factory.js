@@ -3,7 +3,8 @@ function GamesDataFactory($http) {
     return {
         getAll: getAllGames,
         getOne: getOneGame,
-        addOne: addOneGame
+        addOne: addOneGame,
+        delete: deleteGame
 
     };
     function addOneGame(game) {
@@ -16,10 +17,14 @@ function GamesDataFactory($http) {
     function getOneGame(id) {
         return $http.get("/api/games/" + id).then(complete).catch(failed);
     }
+    function deleteGame(id) {
+        return $http.delete("/api/games/"+id).then(complete).catch(failed);
+    }
     function complete(response) {
         return response.data;
     }
     function failed(error) {
         return error.status.statusText;
     }
+    
 }

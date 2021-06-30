@@ -20,6 +20,9 @@ router.route("/users/:id/destination")
 .get(destination.getDestination)
 .post(destination.addDestination)
 .put(destination.fullUpdateDestination)
-.delete(destination.deleteDestination)
+.delete(destination.deleteDestination) //deletes all destination
+
+router.route("/users/:id/destination/:destinationId")
+.delete(destination.deleteOneDestination)
 
 module.exports = router;

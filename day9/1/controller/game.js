@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const Game = mongoose.model("Game");
 
 const getAllGames = function(req,res){
-    Game.find().limit(5).exec(function(err,games){
+    Game.find().limit(5).sort({year:-1}).exec(function(err,games){
         const response = {
             status:200,
             data: games
