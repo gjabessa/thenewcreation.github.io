@@ -1,0 +1,12 @@
+<h1>
+   <p>{{vm.user.name}}
+    </p>
+</h1>
+
+<p>
+    Name:{{vm.user.name}}<br>
+    Budget:{{vm.user.budget | currency}}<br>
+    destinations:<ul ng-repeat="destination in vm.user.destinations"> <li>Name: {{destination.name}}</li> <li> Number of visits: {{destination.numVisits}}</li></ul><br>
+    <button class="btn btn-warning" ng-click="vm.deleteUser()">Delete</button>
+    
+</p>
