@@ -9,8 +9,14 @@ function UsersDataFactory($http) {
         deleteDestination: deleteDestination,
         login: loginUser,
         register: addOneUser,
+        search: search
     }
 
+    function search(kw){
+        return $http.get("/api/userSearch?kw="+kw)
+        .then(complete)
+        .catch(failed)
+    }
 
     function loginUser(user) {
         

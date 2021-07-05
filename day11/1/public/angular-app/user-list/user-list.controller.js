@@ -29,4 +29,10 @@ function UsersController(UsersDataFactory, AuthFactory) {
     //     vm.users = response.data;
     // })
 
+    vm.search= function(){
+        UsersDataFactory.search(vm.kw).then(function (response) {
+            vm.users = response;
+        });
+    }
+
 }

@@ -4,6 +4,7 @@
     </h1>
     
     <ul>
+        <input ng-model="vm.kw"> <button ng-click="vm.search()">Search</button>
         <li ng-repeat="user in vm.users">
             <a ng-href="#!/users/{{user._id}}">{{user.name}}</a>
         </li>

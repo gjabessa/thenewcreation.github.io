@@ -29,4 +29,7 @@ router.route("/users/:id/destination/:destinationId")
 router.route("/users/login")
     .post(authController.login);
 
+router.route("/userSearch")
+.get(user.search);
+
 module.exports = router;
