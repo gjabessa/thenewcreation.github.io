@@ -1,0 +1,11 @@
+<div class="container">
+ 
+    <ul>
+        
+        <li *ngFor="let user of users">
+            <a href="/detail/{{user._id}}">{{user.name}}</a>
+        </li>
+    </ul>
+    <h2>Add a user</h2> <br>
+   <app-add-user></app-add-user>
+</div>

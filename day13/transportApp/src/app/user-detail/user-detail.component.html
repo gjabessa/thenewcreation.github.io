@@ -1,0 +1,18 @@
+<div class="container">
+ 
+     
+         Name:{{user.name}}<br>
+         Budget:{{user.budget | currency}}<br>
+         destinations:<ul *ngFor="let destination of user?.destinations"> 
+             <li>Name: {{destination.name}}</li>
+              <li> Number of visits: {{destination.numVisits}}</li> 
+              </ul>
+
+        <button class="btn btn-warning" (click)="delete()">Delete</button>
+    
+        <DIV *ngIf="deleteSuccess" class="alert alert-success" role="alert">
+        <P>Success</P>
+        </DIV>
+
+</div>
+<app-add-user></app-add-user>

@@ -3,7 +3,7 @@ const path= require("path");
 const app = express();
 
 require("./api/data/db");
-require("../model/job")
+require("./api/model/job")
 
 const routes = require("./api/routes/index");
 

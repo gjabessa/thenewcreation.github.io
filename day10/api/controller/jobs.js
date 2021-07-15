@@ -60,7 +60,7 @@ module.exports.jobsAddOne = function (req, res) {
 		experience: req.body.experience,
 		description: req.body.description,
 		location: {address: req.body.address, city: req.body.city, postCode: req.body.postCode},
-		postDate: req.body.postDate
+		postDate: Date.now()
 	};
 
 	Job.create(newJob, function (err, Job) {

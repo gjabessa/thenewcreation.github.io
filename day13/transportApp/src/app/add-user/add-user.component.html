@@ -1,0 +1,13 @@
+<div class="container">
+
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+   
+        <input  formControlName="name">
+
+        <input formControlName="budget">
+    
+      <button mat-button color="primary">Save</button>
+
+    </form>
+
+</div>
